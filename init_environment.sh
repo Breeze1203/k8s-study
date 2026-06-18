@@ -81,8 +81,23 @@ else
     kubectl version --client
 fi
 
+
 echo "=========================================="
-echo " 4. bash 自动补全配置"
+echo " 4. 安装go环境"
+echo "=========================================="
+if command_exists gol; then
+    echo "✅ go 已安装："
+    go version
+else
+    echo "⬇️ 安装 go..."
+    curl -LO "https://go.dev/dl/go1.26.4.linux-386.tar.gz"
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.26.4.linux-amd64.tar.gz
+    go version
+fi
+
+
+echo "=========================================="
+echo " 5. bash 自动补全配置"
 echo "=========================================="
 
 if ! dpkg -l | grep -q bash-completion; then
@@ -120,6 +135,13 @@ if command_exists kubectl; then
     kubectl version --client
 else
     echo "Kubectl: 未安装"
+fi
+
+if command_exists go; then
+    echo "go:"
+    go version
+else
+    echo "go: 未安装"
 fi
 
 echo "=========================================="
