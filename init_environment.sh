@@ -91,7 +91,7 @@ if command_exists gol; then
 else
     echo "⬇️ 安装 go..."
     curl -LO "https://go.dev/dl/go1.26.4.linux-386.tar.gz"
-    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.26.4.linux-amd64.tar.gz
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.26.4.linux-386.tar.gz
     go version
 fi
 
