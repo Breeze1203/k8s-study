@@ -173,7 +173,7 @@ fi
 
 echo "配置ssk-key"
 ssh-keygen -t ed25519 -C "tpeng9240@gmail.com"
-cat ~/.ssh/id_rsa.pub
+cat /root/.ssh/id_ed25519.pub
 
 
 echo "=========================================="
