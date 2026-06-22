@@ -1,16 +1,16 @@
-FROM mysql/mysql-server:8.0.32
+# Dockerfile
+FROM golang:1.16-buster AS builder
+RUN mkdir /src
+ADD . /src
+WORKDIR /src
 
-MAINTAINER pengtao(tpeng9240@gmail.com)
+RUN go env -w GO111MODULE=auto
+RUN go build -o main .
 
-ENV TZ=Asia/Shanghai
-ENV LANG C.UTF-8
+FROM gcr.io/distroless/base-debian10
 
-RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+WORKDIR /
 
-COPY ./xiaoying.sql /docker-entrypoint-initdb.d
-
-COPY ./xiaoying_flow.sql /docker-entrypoint-initdb.d
-
-COPY ./xiaoying_crm.sql /docker-entrypoint-initdb.d
-
-EXPOSE 3306
+COPY --from=builder /src/main /main
+EXPOSE 3000
+ENTRYPOINT ["/main"]
