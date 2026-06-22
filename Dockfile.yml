@@ -1,0 +1,16 @@
+FROM mysql/mysql-server:8.0.32
+
+MAINTAINER pengtao(tpeng9240@gmail.com)
+
+ENV TZ=Asia/Shanghai
+ENV LANG C.UTF-8
+
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+COPY ./xiaoying.sql /docker-entrypoint-initdb.d
+
+COPY ./xiaoying_flow.sql /docker-entrypoint-initdb.d
+
+COPY ./xiaoying_crm.sql /docker-entrypoint-initdb.d
+
+EXPOSE 3306
