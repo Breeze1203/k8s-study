@@ -171,9 +171,12 @@ else
     echo "go: 未安装"
 fi
 
-echo "配置ssk-key"
+echo "配置git"
 ssh-keygen -t ed25519 -C "tpeng9240@gmail.com"
 cat /root/.ssh/id_ed25519.pub
+git config --global user.mail "tpeng9240@gmail.com"
+git config --global user.name "pengtao"
+
 
 
 echo "=========================================="
