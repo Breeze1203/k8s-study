@@ -48,19 +48,39 @@ else
     echo "ℹ️ 当前是 root 用户，跳过 docker 用户组配置"
 fi
 
+# echo "=========================================="
+# echo " 2. Minikube 安装/检查"
+# echo "=========================================="
+
+# if command_exists minikube; then
+#     echo "✅ Minikube 已安装："
+#     minikube version
+# else
+#     echo "⬇️ 安装 Minikube..."
+#     curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+#     sudo install minikube-linux-amd64 /usr/local/bin/minikube
+#     rm -f minikube-linux-amd64
+#     minikube version
+# fi
+
 echo "=========================================="
-echo " 2. Minikube 安装/检查"
+echo " 2. Kind 安装/检查"
 echo "=========================================="
 
-if command_exists minikube; then
-    echo "✅ Minikube 已安装："
-    minikube version
+if command_exists kind; then
+    echo "✅ Kind 已安装："
+    kind version
 else
-    echo "⬇️ 安装 Minikube..."
-    curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
-    sudo install minikube-linux-amd64 /usr/local/bin/minikube
-    rm -f minikube-linux-amd64
-    minikube version
+    echo "⬇️ 安装 Kind..."
+
+    curl -Lo kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+
+    chmod +x kind
+
+    sudo mv kind /usr/local/bin/kind
+
+    echo "✅ Kind 安装完成"
+    kind version
 fi
 
 echo "=========================================="
@@ -123,11 +143,18 @@ else
     echo "Docker: 未安装"
 fi
 
-if command_exists minikube; then
-    echo "Minikube:"
-    minikube version
+# if command_exists minikube; then
+#     echo "Minikube:"
+#     minikube version
+# else
+#     echo "Minikube: 未安装"
+# fi
+
+if command_exists kind; then
+    echo "kind:"
+    kind version
 else
-    echo "Minikube: 未安装"
+    echo "kind: 未安装"
 fi
 
 if command_exists kubectl; then
