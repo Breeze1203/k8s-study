@@ -176,6 +176,8 @@ ssh-keygen -t ed25519 -C "tpeng9240@gmail.com"
 cat /root/.ssh/id_ed25519.pub
 git config --global user.mail "tpeng9240@gmail.com"
 git config --global user.name "pengtao"
+git clone https://github.com/Breeze1203/k8s-study.git
+git remote set-url origin git@github.com:Breeze1203/k8s-study.git
 
 
 
