@@ -2,9 +2,6 @@
 
 set -e
 
-mkdir -p k8s
-cd k8s
-
 
 if [ $# -eq 0 ]; then
     echo "用法: $0 <service-name>"
